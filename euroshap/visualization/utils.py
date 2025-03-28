@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from torch.utils.data import Dataset
 
 
-def plot_cutout(dataset: Dataset, index: int) -> None:
+def plot_cutout(dataset: Dataset, index: int, save_path: str=None) -> None:
     """
     Plots a single image from the dataset at the specified index.
 
@@ -25,4 +25,6 @@ def plot_cutout(dataset: Dataset, index: int) -> None:
     plt.imshow(img_np)
     plt.title(f"Label: {dataset.classes[label]}")
     plt.axis('off')
+    if save_path:
+        plt.savefig(save_path)
     plt.show();
