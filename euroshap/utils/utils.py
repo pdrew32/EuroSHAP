@@ -9,18 +9,19 @@ def report_filesize(url):
     return
 
 
-def shape_of_cutout(dataset: Dataset) -> None:
+def shape_of_cutout(dataset: Dataset, index: int=0) -> None:
     """
     Print the shape of the first image in the dataset
 
     Args:
         dataset (pytorch Dataset): The dataset to analyze. Each element 
             is expected to be a tuple (image, label).
+        index (int): the index of the image to be reported. defaults to 0
 
     Returns:
         None
     """
-    img, _ = dataset[0]
+    img, _ = dataset[index]
     shape = list(img.shape)
     print(f'Shape of images [color, height, width]: {shape}')
     return None
