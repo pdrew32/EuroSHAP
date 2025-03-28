@@ -1,6 +1,7 @@
 from torch.utils.data import DataLoader
 import pandas as pd
 from torch.utils.data import Dataset
+import numpy as np
 
 def image_stats(dataset: Dataset, batch_size: int=1) -> pd.DataFrame:
     """
