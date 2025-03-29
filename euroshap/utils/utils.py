@@ -1,5 +1,6 @@
 import requests
 from torch.utils.data import Dataset
+import torch
 
 
 def report_filesize(url):
@@ -25,3 +26,16 @@ def shape_of_cutout(dataset: Dataset, index: int=0) -> None:
     shape = list(img.shape)
     print(f'Shape of images [color, height, width]: {shape}')
     return None
+
+
+def get_device() -> str:
+    """
+    Returns the type of accelerator device if available, otherwise returns 'cpu'.
+    Also prints the device being used.
+    
+    Returns:
+        str: The accelerator device type or 'cpu'.
+    """
+    device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
+    print(f"Using {device} device")
+    return device
