@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from torchvision.models import resnet18, ResNet18_Weights
+import pytorch_lightning as pl
 
 class SatResNet(nn.Module):
     def __init__(self, num_classes: int=10):
@@ -23,3 +24,32 @@ class SatResNet(nn.Module):
 
     def forward(self, x):
         return self.model(x)
+    
+
+class LightningClassifier(pl.LightningModule):
+    def __init__(self, model, lr=0.001, criterion=None):
+        super().__init__()
+        self.model = model
+        self.lr = lr
+        self.criterion = criterion if criterion is not None else nn.CrossEntropyLoss()
+
+    def forward(self, x):
+        return self.model(x)
+    
+    def training_step(self, batch, _):
+        images, labels = batch
+        outputs = self(images)
+        loss = self.criterion(outputs, labels)
+        self.log('train_loss', loss, on_epoch=True, prog_bar=True)
+        return loss
+    
+    def validation_step(self, batch, _):
+        images, labels = batch
+        outputs = self(images)
+        loss = self.criterion(outputs, labels)
+        self.log('val_loss', loss, on_epoch=True, prog_bar=True)
+        return loss
+    
+    def configure_optimizers(self):
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
+        return optimizer
