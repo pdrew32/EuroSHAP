@@ -7,7 +7,16 @@ EuroSHAP is designed to investigate how effectively machine learning models high
 3) **Model Evaluation and Selection**: Evaluate the quality of each model and select the best.
 4) **Interpretability with SHAP** Apply `shap.DeepExplainer` to highlight pixels that contribute to the classification of each image, verifying the models are making predictions for the right reasons.
 
-# Functions Summary
+# Project Roadmap
+Future work includes the following:
+
+1) Write visualization and model evaluation routines
+2) Write tests for functions already written
+3) interpretability module with Deep SHAP
+4) Add more models to compare with the baseline.
+5) consider hyperparameter tuning as well as cross validation
+
+# Summary of Work
 Below is a summary of functions I've written in support of this project broken down by analysis type.
 ## Exploratory Data Analysis
 ### Computing Image Statistics
