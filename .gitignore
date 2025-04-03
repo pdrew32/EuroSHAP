@@ -3,3 +3,4 @@ data/
 __pycache__
 *.pyc
 euroshap/modeling/lightning_logs/
+models/*.ckpt
